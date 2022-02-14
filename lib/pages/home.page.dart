@@ -13,8 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Color _color = Colors.deepPurple;
-  var _gasCtrl = new MoneyMaskedTextController();
-  var _alcCtrl = new MoneyMaskedTextController();
+  var _gasCtrl = MoneyMaskedTextController();
+  var _alcCtrl = MoneyMaskedTextController();
   var _busy = false;
   var _completed = false;
   var _resultText = "Compensa utilizar álcool";
@@ -24,13 +24,13 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: AnimatedContainer(
-        duration: Duration(
+        duration: const Duration(
           milliseconds: 1200,
         ),
         color: _color,
         child: ListView(
           children: <Widget>[
-            Logo(),
+            const Logo(),
             _completed
                 ? Success(
                     result: _resultText,
@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
 
   Future calculate() async {
     double alc =
-        double.parse(_alcCtrl.text.replaceAll(new RegExp(r'[,.]'), '')) / 100;
+        double.parse(_alcCtrl.text.replaceAll(RegExp(r'[,.]'), '')) / 100;
     double gas =
-        double.parse(_gasCtrl.text.replaceAll(new RegExp(r'[,.]'), '')) / 100;
+        double.parse(_gasCtrl.text.replaceAll(RegExp(r'[,.]'), '')) / 100;
     double res = alc / gas;
 
     setState(() {
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       _busy = true;
     });
 
-    return new Future.delayed(
+    return Future.delayed(
         const Duration(seconds: 1),
         () => {
               setState(() {
@@ -79,8 +79,8 @@ class _HomePageState extends State<HomePage> {
 
   reset() {
     setState(() {
-      _alcCtrl = new MoneyMaskedTextController();
-      _gasCtrl = new MoneyMaskedTextController();
+      _alcCtrl = MoneyMaskedTextController();
+      _gasCtrl = MoneyMaskedTextController();
       _completed = false;
       _busy = false;
       _color = Colors.deepPurple;

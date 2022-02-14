@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LoadingButton extends StatelessWidget {
   var busy = false;
   var invert = false;
@@ -7,11 +8,12 @@ class LoadingButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   LoadingButton({
+    Key? key,
     required this.busy,
     required this.invert,
     required this.text,
     required this.onPressed,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,12 @@ class LoadingButton extends StatelessWidget {
         ? Container(
             alignment: Alignment.center,
             height: 50,
-            child: CircularProgressIndicator(
+            child: const CircularProgressIndicator(
               backgroundColor: Colors.white,
             ),
           )
         : Container(
-            margin: EdgeInsets.all(30),
+            margin: const EdgeInsets.all(30),
             height: 60,
             width: double.infinity,
             decoration: BoxDecoration(
